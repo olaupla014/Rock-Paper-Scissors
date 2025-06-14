@@ -1,4 +1,3 @@
-
 function getComputerChoice(){
     let choice = Math.random();
 
@@ -23,20 +22,15 @@ function getHumanChoice(){
 
 
 function playRound(computerChoice, humanChoice){
-    let winMessage = `You win! ${humanChoice} beats ${computerChoice}`;
-    let looseMessage = `You loose! ${computerChoice} beats ${humanChoice}`;
-    let tie = "It's a tie!";
-
-    let result;
-
+    let result = 0;
     if (computerChoice == "rock" && humanChoice == "paper" ||computerChoice == "scissors" && humanChoice == "rock"||computerChoice == "paper" && humanChoice == "scissors"){
-        ++humanScore;
-        result = winMessage;
+        result = 1;
+        console.log(`You win! ${humanChoice} beats ${computerChoice}`)
     } else if (computerChoice == humanChoice){
-        result = tie;
+        console.log("It's a tie!")
     } else{
-        result = looseMessage;
-        ++computerChoice;
+        console.log(`You loose! ${computerChoice} beats ${humanChoice}`)
+        result = 2;
     }
 
     return result;
@@ -50,7 +44,12 @@ function playGame(){
         const computerChoice = getComputerChoice();
         const humanChoice = getHumanChoice();
 
-        console.log(playRound(computerChoice, humanChoice))
+        result = playRound(computerChoice, humanChoice);
+        if (result == 1){
+            ++humanScore;
+        } else if (result == 2){
+            ++computerScore;
+        }
     }
 
     if (humanScore == computerScore){
